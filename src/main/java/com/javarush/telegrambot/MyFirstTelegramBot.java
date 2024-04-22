@@ -22,7 +22,21 @@ public class MyFirstTelegramBot extends MultiSessionTelegramBot {
     @Override
     public void onUpdateEventReceived(Update updateEvent) {
         // TODO: основной функционал бота будем писать здесь
-        sendTextMessageAsync("Привет, будущий программист Влад!");
+        if(getMessageText().equals("/bye")){
+            sendTextMessageAsync("Asta la vista, baby!");
+        }
+
+        if (getMessageText().equals("/start")) {
+            sendTextMessageAsync("Ваше любимое животное?", Map.of("Кот", "cat", "Собака", "dog"));
+        }
+
+        if (getCallbackQueryButtonKey().equals("cat")) {
+            sendPhotoMessageAsync("step_4_pic");
+        }
+
+        if (getCallbackQueryButtonKey().equals("dog")) {
+            sendPhotoMessageAsync("step_6_pic");
+        }
     }
 
     public static void main(String[] args) throws TelegramApiException {
